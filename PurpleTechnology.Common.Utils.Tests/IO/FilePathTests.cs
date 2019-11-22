@@ -2,7 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PurpleTechnology.Common.Utils.IO;
 using System;
 
-namespace PurpleTechnology.Common.Utils.UnitTests.IO
+namespace PurpleTechnology.Common.Utils.Tests.IO
 {
     // TODO: Do a proper testing of FilePath class.
     public class FilePathTests

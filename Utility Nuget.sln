@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29509.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PurpleTechnology.Common.Utils", "PurpleTechnology.Common.Utils\PurpleTechnology.Common.Utils.csproj", "{9CA34026-BB56-4377-B9EB-14B2840673A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PurpleTechnology.Common.Utils.UnitTests", "PurpleTechnology.Common.Utils.UnitTests\PurpleTechnology.Common.Utils.UnitTests.csproj", "{6D041021-6E91-46E3-A3BA-6C6A881C7FCD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PurpleTechnology.Common.Utils.Tests", "PurpleTechnology.Common.Utils.Tests\PurpleTechnology.Common.Utils.Tests.csproj", "{6D041021-6E91-46E3-A3BA-6C6A881C7FCD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
