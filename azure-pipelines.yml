@@ -1,5 +1,9 @@
 variables:
+  ArtifactName: 'PurpleTechnology.Common.Utils'
+  BuildProject: '$(ArtifactName)/$(ArtifactName).csproj'
+  PackDirectory: '$(Build.ArtifactStagingDirectory)/$(ArtifacName)'
   BuildArguments: '--configuration Release --framework netstandard2.1 -maxcpucount --verbosity detailed'
+  PathtoPublish: '$(PackDirectory)'
 
 name: '$(GITVERSION_SemVer)'
 
@@ -25,24 +29,24 @@ steps:
   displayName: 'Build runtime library'
   inputs:
     command: build
-    projects: 'PurpleTechnology.Common.Utils/PurpleTechnology.Common.Utils.csproj'
+    projects: '$(BuildProject)'
     arguments: '$(BuildArguments)'
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack nuget package'
   inputs:
     command: 'pack'
-    includesymbols: true
+    packagesToPack: '$(BuildProject)'
+    arguments: '$(BuildArguments)'
+    packDirectory: '$(PackDirectory)'
     versioningScheme: byEnvVar
     versionEnvVar: 'GitVersion.NuGetVersion'
-    projects: 'PurpleTechnology.Common.Utils/PurpleTechnology.Common.Utils.csproj'
-    arguments: '$(BuildArguments)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish artifacts'
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: PurpleTechnology.Common.Utils
+    PathtoPublish: '$(PathtoPublish)'
+    ArtifactName: '$(ArtifactName)'
     parallel: true
 
 - task: DotNetCoreCLI@2
@@ -53,3 +57,4 @@ steps:
     nuGetFeedType: 'internal'
     feedPublish: 'Putech'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+
