@@ -1,0 +1,68 @@
+variables:
+  BuildArguments: '--configuration Release --framework netstandard2.1 -maxcpucount --verbosity detailed'
+  RuntimeBuildArguments: ${{format('{0} {1}', variables.BuildArguments, '/p:Platform=x64')}}
+
+name: $(GITVERSION_SemVer)
+
+trigger:
+- master
+- feature/*
+
+pr:
+- master
+- feature/*
+
+pool:
+  vmImage: 'windows-latest'
+
+steps:
+
+- task: GitVersion@5
+  inputs:
+    runtime: 'core'
+    preferBundledVersion: false
+
+- task: NuGetToolInstaller@0
+  displayName: 'Install Nuget'
+  inputs:
+    versionSpec: '>=5.3.0'
+    checkLatest: true
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build runtime library'
+  inputs:
+    command: build
+    projects: 'PurpleTechnology.Common.Utils/PurpleTechnology.Common.Utils.csproj'
+    arguments: '$(RuntimeBuildArguments)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build reference library'
+  inputs:
+    command: build
+    projects: 'PurpleTechnology.Common.Utils/PurpleTechnology.Common.Utils.csproj'
+    arguments: '$(BuildArguments)'
+
+- task: NuGetCommand@2
+  displayName: 'Create nuget package'
+  inputs:
+    command: pack
+    packagesToPack: '$(Build.SourcesDirectory)/PurpleTechnology.Common.Utils/PurpleTechnology.Common.Utils.nuspec'
+    packDestination: '$(Build.ArtifactStagingDirectory)/PurpleTechnology.Common.Utils'
+    versioningScheme: byEnvVar
+    versionEnvVar: 'GitVersion.NuGetVersion'
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish artifacts'
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)/PurpleTechnology.Common.Utils'
+    ArtifactName: PurpleTechnology.Common.Utils
+    parallel: true
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publish nuget package to the feed'
+  inputs:
+    command: 'push'
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/PurpleTechnology.Common.Utils/*.nupkg'
+    nuGetFeedType: 'internal'
+    feedPublish: 'Putech'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
