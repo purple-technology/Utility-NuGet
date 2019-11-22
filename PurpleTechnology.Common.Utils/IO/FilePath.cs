@@ -36,9 +36,13 @@ namespace PurpleTechnology.Common.Utils.IO
             AbsolutePath = Path.GetDirectoryName(path: path) ?? String.Empty;
         }
 
-        public static explicit operator FilePath(string s)
+        /// <summary>
+        /// Casts the string to a new instance of the FilePath class.
+        /// </summary>
+        /// <param name="inputString">An input string that represents a valid file name path.</param>
+        public static explicit operator FilePath(string inputString)
         {
-            return new FilePath(path: s);
+            return new FilePath(path: inputString);
         }
 
         /// <summary>

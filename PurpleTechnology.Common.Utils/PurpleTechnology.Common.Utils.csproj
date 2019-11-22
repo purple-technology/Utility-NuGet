@@ -11,5 +11,6 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageReleaseNotes />
     <Copyright>Purple Technology</Copyright>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 </Project>
