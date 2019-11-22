@@ -6,6 +6,7 @@ variables:
   PackDirectory: '$(Build.ArtifactStagingDirectory)/$(ArtifacName)'
   BuildArguments: '--configuration $(buildConfiguration) --framework netstandard2.1 --verbosity detailed'
   PathtoPublish: '$(PackDirectory)'
+  PackagesToPush: '$(PackDirectory)'
 
 name: '$(GITVERSION_SemVer)'
 
@@ -57,7 +58,7 @@ steps:
   displayName: 'Publish nuget package to the feed'
   inputs:
     command: 'push'
-    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+    packagesToPush: '$(PackagesToPush)/*.nupkg'
     nuGetFeedType: 'internal'
     feedPublish: 'Putech'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
