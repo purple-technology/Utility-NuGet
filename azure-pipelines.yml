@@ -2,6 +2,7 @@ variables:
   ArtifactName: 'PurpleTechnology.Common.Utils'
   buildConfiguration: "Release"
   BuildProject: '$(ArtifactName)/$(ArtifactName).csproj'
+  PackagesToPack: '$(BuildProject)'
   PackDirectory: '$(Build.ArtifactStagingDirectory)/$(ArtifacName)'
   BuildArguments: '--configuration $(buildConfiguration) --framework netstandard2.1 --verbosity detailed'
   PathtoPublish: '$(PackDirectory)'
@@ -31,15 +32,15 @@ steps:
   inputs:
     command: build
     arguments: '$(BuildArguments)'
-    projects: '**/*.csproj'
-#    projects: '$(BuildProject)'
+    projects: '$(BuildProject)'
+#    projects: '**/*.csproj'
 
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack nuget package'
   inputs:
     command: 'pack'
-    packagesToPack: '**/$(ArtifactName)/*.csproj;!**/$(ArtifactName)*.Tests.csproj'
+    packagesToPack: '$(PackagesToPack)'
     packDirectory: '$(PackDirectory)'
     versioningScheme: byEnvVar
     versionEnvVar: 'GitVersion.NuGetVersion'
