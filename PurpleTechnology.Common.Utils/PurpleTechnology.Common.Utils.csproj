@@ -3,6 +3,12 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/purple-technology/Utility-Nugets/tree/master</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/purple-technology/Utility-Nugets/tree/master</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>Common utilities utility help</PackageTags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageReleaseNotes />
   </PropertyGroup>
-
 </Project>
