@@ -1,6 +1,5 @@
 variables:
   BuildArguments: '--configuration Release --framework netstandard2.1 -maxcpucount --verbosity detailed'
-  RuntimeBuildArguments: ${{format('{0} {1}', variables.BuildArguments, '/p:Platform=x64')}}
 
 name: $(GITVERSION_SemVer)
 
@@ -32,22 +31,14 @@ steps:
   displayName: 'Build runtime library'
   inputs:
     command: build
-    projects: 'PurpleTechnology.Common.Utils/PurpleTechnology.Common.Utils.csproj'
-    arguments: '$(RuntimeBuildArguments)'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Build reference library'
+  displayName: 'Pack nuget package'
   inputs:
-    command: build
-    projects: 'PurpleTechnology.Common.Utils/PurpleTechnology.Common.Utils.csproj'
-    arguments: '$(BuildArguments)'
-
-- task: NuGetCommand@2
-  displayName: 'Create nuget package'
-  inputs:
-    command: pack
-    packagesToPack: '$(Build.SourcesDirectory)/PurpleTechnology.Common.Utils/PurpleTechnology.Common.Utils.nuspec'
-    packDestination: '$(Build.ArtifactStagingDirectory)/PurpleTechnology.Common.Utils'
+    command: 'pack'
+    packagesToPack: '$(BuildProject)'
+    arguments: '--configuration Release --no-build --no-dependencies --no-restore --nologo --verbosity detailed'
+    packDirectory: '$(Build.ArtifactStagingDirectory)/PurpleTechnology.Common.Utils'
     versioningScheme: byEnvVar
     versionEnvVar: 'GitVersion.NuGetVersion'
 
