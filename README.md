@@ -1,4 +1,4 @@
-# Utility-Nugets
+# Utility Nugets
 A nuget for various common utilities.
 
 ## Target
