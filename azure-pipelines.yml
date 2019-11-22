@@ -1,7 +1,7 @@
 variables:
   BuildArguments: '--configuration Release --framework netstandard2.1 -maxcpucount --verbosity detailed'
 
-name: $(GITVERSION_SemVer)
+name: '$(GITVERSION_SemVer)'
 
 trigger:
 - master
