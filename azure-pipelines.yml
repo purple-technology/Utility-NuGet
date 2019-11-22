@@ -21,12 +21,6 @@ steps:
     runtime: 'core'
     preferBundledVersion: false
 
-- task: NuGetToolInstaller@0
-  displayName: 'Install Nuget'
-  inputs:
-    versionSpec: '>=5.3.0'
-    checkLatest: true
-
 - task: DotNetCoreCLI@2
   displayName: 'Build runtime library'
   inputs:
@@ -47,11 +41,3 @@ steps:
     ArtifactName: PurpleTechnology.Common.Utils
     parallel: true
 
-#- task: DotNetCoreCLI@2
-#  displayName: 'Publish nuget package to the feed'
-#  inputs:
-#    command: 'push'
-#    packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
-#    nuGetFeedType: 'internal'
-#    feedPublish: 'Putech'
-#  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
