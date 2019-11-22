@@ -6,3 +6,6 @@ A nuget for various common utilities.
 
 ## C# 8.x status
 **Enabled.**
+
+## Nullabe status
+**Enabled.**
