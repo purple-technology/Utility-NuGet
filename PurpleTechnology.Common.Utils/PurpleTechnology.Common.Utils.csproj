@@ -10,5 +10,6 @@
     <PackageTags>Common utilities utility help</PackageTags>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageReleaseNotes />
+    <Copyright>Purple Technology</Copyright>
   </PropertyGroup>
 </Project>
