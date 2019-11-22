@@ -37,7 +37,7 @@ namespace PurpleTechnology.Common.Utils.IO
         }
 
         /// <summary>
-        /// Casts the string to a new instance of the FilePath class.
+        /// Explicit casting from a string to a new instance of the FilePath class.
         /// </summary>
         /// <param name="inputString">An input string that represents a valid file name path.</param>
         public static explicit operator FilePath(string inputString)

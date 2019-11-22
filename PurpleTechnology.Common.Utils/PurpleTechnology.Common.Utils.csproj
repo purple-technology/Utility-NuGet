@@ -11,6 +11,9 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageReleaseNotes />
     <Copyright>Purple Technology</Copyright>
+    <Authors>FinTech</Authors>
+    <Company>Purple Technology</Company>
+    <Description>A NuGet for a common utilities.</Description>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
 </Project>
