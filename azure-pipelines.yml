@@ -1,8 +1,9 @@
 variables:
   ArtifactName: 'PurpleTechnology.Common.Utils'
+  buildConfiguration: "Release"
   BuildProject: '$(ArtifactName)/$(ArtifactName).csproj'
   PackDirectory: '$(Build.ArtifactStagingDirectory)/$(ArtifacName)'
-  BuildArguments: '--configuration Release --framework netstandard2.1 -maxcpucount --verbosity detailed'
+  BuildArguments: '--configuration $(buildConfiguration) --framework netstandard2.1 --verbosity detailed'
   PathtoPublish: '$(PackDirectory)'
 
 name: '$(GITVERSION_SemVer)'
@@ -29,18 +30,20 @@ steps:
   displayName: 'Build runtime library'
   inputs:
     command: build
-    projects: '$(BuildProject)'
     arguments: '$(BuildArguments)'
+    projects: '**/*.csproj;!**/*.Tests.csproj'
+#    projects: '$(BuildProject)'
+
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack nuget package'
   inputs:
     command: 'pack'
     packagesToPack: '**/$(ArtifactName)/*.csproj;!**/$(ArtifactName)*.Tests.csproj'
-#    arguments: '$(BuildArguments)'
     packDirectory: '$(PackDirectory)'
     versioningScheme: byEnvVar
     versionEnvVar: 'GitVersion.NuGetVersion'
+#    arguments: '$(BuildArguments)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish artifacts'
