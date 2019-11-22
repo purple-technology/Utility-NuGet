@@ -25,20 +25,20 @@ steps:
     runtime: 'core'
     preferBundledVersion: false
 
-#- task: DotNetCoreCLI@2
-#  displayName: 'Build runtime library'
-#  inputs:
-#    command: build
-#    projects: '$(BuildProject)'
-#    arguments: '$(BuildArguments)'
+- task: DotNetCoreCLI@2
+  displayName: 'Build runtime library'
+  inputs:
+    command: build
+    projects: '$(BuildProject)'
+    arguments: '$(BuildArguments)'
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack nuget package'
   inputs:
     command: 'pack'
-    packagesToPack: '**/*.csproj;!**/*.Tests.csproj'
+    packagesToPack: '**/$(ArtifactName)/*.csproj;!**/$(ArtifactName)*.Tests.csproj'
 #    arguments: '$(BuildArguments)'
-#    packDirectory: '$(PackDirectory)'
+    packDirectory: '$(PackDirectory)'
     versioningScheme: byEnvVar
     versionEnvVar: 'GitVersion.NuGetVersion'
 
@@ -57,6 +57,4 @@ steps:
     nuGetFeedType: 'internal'
     feedPublish: 'Putech'
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
-
-
 
