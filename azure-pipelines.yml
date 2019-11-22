@@ -31,7 +31,7 @@ steps:
   inputs:
     command: build
     arguments: '$(BuildArguments)'
-    projects: '**/*.csproj;!**/*.Tests.csproj'
+    projects: '**/*.csproj'
 #    projects: '$(BuildProject)'
 
 
