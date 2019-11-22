@@ -12,7 +12,7 @@ namespace PurpleTechnology.Common.Utils.IO
     public class SimpleFileNameProposer
     {
         /// <summary>
-        /// Thread-safety lock. Use this as a lock for your export/copy operation. 
+        /// Thread-safety lock. Use this as a lock for your export/copy operation.
         /// </summary>
         public static Object Lock = new object();
 
