@@ -11,4 +11,5 @@ A nuget for various common utilities.
 **Enabled.**
 
 # Build status
-TODO
+[![Build status](https://dev.azure.com/PuTech/Utility%20Nuget/_apis/build/status/purple-technology.Utility-Nuget)](https://dev.azure.com/PuTech/Utility%20Nuget/_build/latest?definitionId=-1)
+
