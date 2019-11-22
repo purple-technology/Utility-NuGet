@@ -9,3 +9,6 @@ A nuget for various common utilities.
 
 ## Nullabe status
 **Enabled.**
+
+# Build status
+TODO
