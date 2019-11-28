@@ -1,5 +1,5 @@
-# Utility Nuget
-A nuget for various common utilities.
+# Utility NuGet
+A NuGet for various common utilities.
 
 ## Target
 .NET Standard 2.1 (compatible with .NET Core 3.0)
