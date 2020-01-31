@@ -29,13 +29,11 @@ steps:
     preferBundledVersion: false
 
 - task: DotNetCoreCLI@2
-  displayName: 'Build runtime library'
+  displayName: 'Build Utils library'
   inputs:
     command: build
     arguments: '$(BuildArguments)'
     projects: '$(BuildProject)'
-#    projects: '**/*.csproj'
-
 
 - task: DotNetCoreCLI@2
   displayName: 'Pack nuget package'
@@ -45,7 +43,6 @@ steps:
     packDirectory: '$(PackDirectory)'
     versioningScheme: byEnvVar
     versionEnvVar: 'GitVersion.NuGetVersion'
-#    arguments: '$(BuildArguments)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish artifacts'
