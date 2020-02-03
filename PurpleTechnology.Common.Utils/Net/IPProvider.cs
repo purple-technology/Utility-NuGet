@@ -12,7 +12,7 @@ namespace PurpleTechnology.Common.Utils.Net
         /// Returns the client's Internet public address.
         /// <para>If network connection is unavailable or remote API unreachable, IPAddress.None is returned.</para>
         /// </summary>
-        /// <returns>The client internet public address.</returns>
+        /// <returns>The client Internet public address.</returns>
         public static IPAddress GetPublicIpAddress()
         {
             IPAddress ipAddress = IPAddress.None;
